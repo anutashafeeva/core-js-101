@@ -313,8 +313,9 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const x = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return arr.sort((a, b) => x.indexOf(a) - x.indexOf(b));
 }
 
 /**
@@ -435,8 +436,13 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = new Array(n).fill(new Array(n).fill(0));
+  const res = arr.map((val, idx) => val.map(
+    (inVal, inIdx) => { if (idx === inIdx) return 1; return 0; },
+  ));
+
+  return res;
 }
 
 /**
@@ -559,6 +565,8 @@ function getElementByIndexes(/* arr, indexes */) {
  *
  */
 function swapHeadAndTail(/* arr */) {
+  // const pos = Math.ceil(arr.length / 2);
+
   throw new Error('Not implemented');
 }
 
