@@ -355,8 +355,43 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  let res = '';
+  let square = 0; let round = 0; let figure = 0; let
+    triangular = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '[') { res += '['; square += 1; }
+    if (str[i] === ']') {
+      if (res.length === 0 || res[res.length - 1] !== '[') return false;
+      res = res.substr(0, res.length - 1);
+      square -= 1;
+    }
+
+    if (str[i] === '{') { res += '{'; figure += 1; }
+    if (str[i] === '}') {
+      if (res.length === 0 || res[res.length - 1] !== '{') return false;
+      res = res.substr(0, res.length - 1);
+      figure -= 1;
+    }
+
+    if (str[i] === '(') { res += '('; round += 1; }
+    if (str[i] === ')') {
+      if (res.length === 0 || res[res.length - 1] !== '(') return false;
+      res = res.substr(0, res.length - 1);
+      round -= 1;
+    }
+
+    if (str[i] === '<') { res += '<'; triangular += 1; }
+    if (str[i] === '>') {
+      if (res.length === 0 || res[res.length - 1] !== '<') return false;
+      res = res.substr(0, res.length - 1);
+      triangular -= 1;
+    }
+
+    if (square < 0 || triangular < 0 || round < 0 || figure < 0) return false;
+  }
+
+  return square === 0 && triangular === 0 && round === 0 && figure === 0;
 }
 
 
