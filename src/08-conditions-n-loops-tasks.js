@@ -133,8 +133,19 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const x10 = rect1.top; const
+    x11 = x10 + rect1.width;
+  const y10 = rect1.left; const
+    y11 = y10 + rect1.height;
+  const x20 = rect2.top; const
+    x21 = x20 + rect2.width;
+  const y20 = rect2.left; const
+    y21 = y20 + rect2.height;
+
+  if (x20 > x11 || y20 > y11 || x10 > x21 || y10 > y21) return false;
+
+  return true;
 }
 
 
@@ -276,27 +287,20 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-  // let x = ccn;
-  // let sum = x % 10;
-  // x = Math.trunc(x / 10);
+function isCreditCardNumber(ccn) {
+  const x = ccn.toString();
+  let sum = +x[x.length - 1];
+  for (let i = x.length - 2; i >= 0; i -= 2) {
+    let num = +x[i];
+    num *= 2;
+    while (num > 9) {
+      num -= 9;
+    }
+    sum += num;
+    if (i > 0) sum += +x[i - 1];
+  }
 
-  // while (x > 0) {
-  //   let num = x % 10;
-  //   num *= 2;
-  //   while (num > 9) {
-  //     num -= 9;
-  //   }
-  //   sum += num;
-  //   x = Math.trunc(x / 10);
-  //   if (x > 0) {
-  //     sum += x % 10;
-  //   }
-  //   x = Math.trunc(x / 10);
-  // }
-
-  // return sum % 10 === 0;
+  return sum % 10 === 0;
 }
 
 /**
