@@ -165,9 +165,14 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
   return function f(...param) {
-    logFunc(`${func.name}(${param}) starts`);
+    let p = '';
+    for (let i = 0; i < param.length - 1; i += 1) {
+      p += `${JSON.stringify(param[i])},`;
+    }
+    p += `${JSON.stringify(param[param.length - 1])}`;
+    logFunc(`${func.name}(${p}) starts`);
     const res = func(...param);
-    logFunc(`${func.name}(${param}) ends`);
+    logFunc(`${func.name}(${p}) ends`);
     return res;
   };
 }
