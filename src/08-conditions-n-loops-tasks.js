@@ -419,8 +419,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -436,8 +436,20 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const res = pathes[0];
+  let pos = res.length;
+  for (let i = 1; i < pathes.length; i += 1) {
+    for (let j = 0; j < Math.min(pos, pathes[i].length); j += 1) {
+      if (res[j] !== pathes[i][j]) {
+        const x = pathes[i].substr(0, j);
+        pos = x.lastIndexOf('/') + 1;
+        break;
+      }
+    }
+  }
+
+  return res.substr(0, pos);
 }
 
 
@@ -459,8 +471,22 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+  for (let k = 0; k < m1.length; k += 1) {
+    let arr = [];
+    for (let i = 0; i < m1.length; i += 1) {
+      let x = 0;
+      for (let j = 0; j < m1[i].length; j += 1) {
+        x += m1[k][j] * m2[j][i];
+      }
+      arr.push(x);
+    }
+    res.push(arr);
+    arr = [];
+  }
+
+  return res;
 }
 
 
